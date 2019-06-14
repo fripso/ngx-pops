@@ -1,15 +1,15 @@
 {
   "name": "ngx-pops",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "author": "Friso Hoekstra",
   "repository": {
-      "type": "git",
-      "url": "https://github.com/fripso/ngx-pops.git"
+    "type": "git",
+    "url": "https://github.com/fripso/ngx-pops.git"
   },
   "keywords": [
-      "angular",
-      "notifications",
-      "typescript"
+    "angular",
+    "notifications",
+    "typescript"
   ],
   "license": "MIT",
   "peerDependencies": {
