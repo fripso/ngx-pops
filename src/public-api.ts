@@ -1,3 +1,3 @@
-export * from './lib/popups.service';
-export * from './lib/popups-container.component';
-export * from './lib/popups.module';
+export * from './lib/pops.service';
+export * from './lib/pops-container.component';
+export * from './lib/ngx-pops.module';

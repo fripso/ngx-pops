@@ -4,13 +4,13 @@
     "directive-selector": [
       true,
       "attribute",
-      "popups",
       "camelCase"
     ],
     "component-selector": [
       true,
       "element",
-      "popups",
+      "pops",
+      "pop",
       "kebab-case"
     ]
   }

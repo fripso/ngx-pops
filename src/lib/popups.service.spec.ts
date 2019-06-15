@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { PopupsService } from './popups.service';
+import { PopsService } from './pops.service';
 
-describe('PopupsService', () => {
+describe('PopsService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: PopupsService = TestBed.get(PopupsService);
+    const service: PopsService = TestBed.get(PopsService);
     expect(service).toBeTruthy();
   });
 });

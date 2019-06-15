@@ -1,9 +1,8 @@
-export class Popup {
+export class Pop {
     id: number;
     type: string;
     content: any;
-    // click event?
-    // link action?
+
     constructor(type, content) {
       this.id = Date.now();
       this.type = type;
