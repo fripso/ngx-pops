@@ -10,23 +10,23 @@ export class PopsService {
 
     constructor() { }
 
-    doPop(type: string, content: any) {
-        const popup = new Pop(type, content);
-        const popups = this.pops.getValue();
-        popups.push(popup);
-        this.pops.next(popups);
+    doPop(content: any) {
+        const pop = new Pop(content);
+        const pops = this.pops.getValue();
+        pops.push(pop);
+        this.pops.next(pops);
     }
 
     getPops() {
         return this.pops.asObservable();
     }
 
-    close(id: number) {
+    close(id?: number) {
         if (!id) { this.pops.next([]); }
-        const popups = this.pops.getValue();
-        const i = popups.findIndex(popup => popup.id === id);
-        popups.splice(i, 1);
-        this.pops.next(popups);
+        const pops = this.pops.getValue();
+        const i = pops.findIndex(pop => pop.id === id);
+        pops.splice(i, 1);
+        this.pops.next(pops);
     }
 
 
