@@ -2,16 +2,19 @@ import { BehaviorSubject } from 'rxjs';
 
 export class Pop {
     id: number;
-    content: any;
+    data: any;
+    component: any;
     hovered: BehaviorSubject<boolean>;
+
     pos: {
         x: number,
         y: number
     };
 
-    constructor(content) {
+    constructor(component, data) {
       this.id = Date.now();
-      this.content = content;
+      this.data = data;
       this.hovered = new BehaviorSubject<boolean>(null);
+      this.component = component;
     }
 }

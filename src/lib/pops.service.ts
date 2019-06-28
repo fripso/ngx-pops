@@ -1,33 +1,31 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { Pop } from './pop.model';
 
 @Injectable({
     providedIn: 'root'
 })
 export class PopsService {
-    private pops = new BehaviorSubject<Pop[]>([]);
 
-    constructor() { }
+    private readonly pop = new Subject<Pop>();
 
-    doPop(content: any) {
-        const pop = new Pop(content);
-        const pops = this.pops.getValue();
-        pops.push(pop);
-        this.pops.next(pops);
+    private readonly functionEvents$ = new Subject<any>();
+
+    constructor() {}
+
+    doPop(component, data: any) {
+        this.pop.next(new Pop(component, data));
     }
 
-    getPops() {
-        return this.pops.asObservable();
+    getPopStream() {
+        return this.pop.asObservable();
     }
 
-    close(id?: number) {
-        if (!id) { this.pops.next([]); }
-        const pops = this.pops.getValue();
-        const i = pops.findIndex(pop => pop.id === id);
-        pops.splice(i, 1);
-        this.pops.next(pops);
+    clearPops() {
+        this.functionEvents$.next('clearViewContainerRef');
     }
 
-
+    getFnEventStream() {
+        return this.functionEvents$.asObservable();
+    }
 }

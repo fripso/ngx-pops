@@ -1,51 +1,64 @@
-import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy, OnDestroy, HostBinding } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { TimerService } from './timer.service';
-import { Subscription } from 'rxjs';
-import { Pop } from './pop.model';
 
 @Component({
     selector: 'pop-component',
-    template: `
-        <ng-content></ng-content>
-    `,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [TimerService]
+    template: '',
 })
-export class PopComponent implements OnInit, OnDestroy {
+export class PopComponent {
+    /**
+     * The destroy event emits after beforeDestroyFunction() resolves (if it exists) and triggers destruction of the component.
+     */
+    @Output() destroy = new EventEmitter<any>();
 
-    @Input() popup: Pop;
-    @Input() duration: number;
-    @Input() enableHold: boolean;
+    /**
+     * Component ID
+     */
+    id: number;
 
-    @Output() close = new EventEmitter<void>();
+    /**
+     * Content to bind in the view.
+     */
+    content: any;
 
-    hover$: Subscription;
+    /**
+     * Component lifetime in ms. Used by autoHide() as a default value.
+     */
+    duration: number;
 
-    constructor(private time: TimerService) {}
+    /**
+     * If specified, gets called when destroyComponent() has been triggered. Should return a Promise.
+     * @returns Promise
+     */
+    private beforeDestroyFunction: () => Promise<void>;
 
-    ngOnInit() {
-        if (this.enableHold) {
-            this.hover$ = this.popup.hovered.subscribe(val => {
-                if (val !== null) {
-                    (val === false) ? this.continueTimer() : this.pauseTimer();
-                }
-            });
+    /**
+     * Triggers a timer that will complete and then trigger destroyComponent() after specified duration. Defaults to global duration.
+     * @param duration Duration in ms
+     */
+    public autoHide(duration: number = this.duration): void {
+        const time = new TimerService();
+        time.start(duration).then(() => this.destroyComponent());
+    }
+
+    /**
+     * Sets value of beforeDestroyFunction.
+     * Useful for performing UI logic (e.g. css animations) that needs to be executed before the component is removed from the DOM
+     * @param func Async function to perform logic before the component is destroyed.
+     */
+    public setBeforeDestroy(func: () => Promise<void>): void {
+        this.beforeDestroyFunction = func;
+    }
+
+    /**
+     * Triggers component destruction.
+     * If beforeDestroyFunction() is specified, it will call that function and wait for the promise to resolve before triggering the event.
+     */
+    public destroyComponent(): void {
+        if (this.beforeDestroyFunction) {
+            this.beforeDestroyFunction().then(() => this.destroy.emit());
+        } else {
+            this.destroy.emit();
         }
-        this.time.start(this.duration).then(() => this.close.emit());
-
-    }
-
-    ngOnDestroy() {
-        if (this.enableHold) {
-            this.hover$.unsubscribe();
-        }
-    }
-
-    public pauseTimer() {
-        this.time.pause();
-    }
-
-    public continueTimer() {
-        this.time.continue();
     }
 }
