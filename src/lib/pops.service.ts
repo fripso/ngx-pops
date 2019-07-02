@@ -16,7 +16,7 @@ export class PopsService {
      * @param component Component to render
      * @param data Data to bind to component
      */
-    doPop(component, data: any): void {
+    doPop(component: any, data: any): void {
         this.pop.next(new Pop(component, data));
     }
 
