@@ -14,7 +14,7 @@ export class PopComponent {
     /**
      * Component ID
      */
-    id: number;
+    readonly id = Date.now();
 
     /**
      * Data to bind in the view.

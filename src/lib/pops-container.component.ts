@@ -86,7 +86,7 @@ export class PopsContainerComponent implements OnInit, OnDestroy {
         const componentFactory = this.componentFactoryResolver.resolveComponentFactory(pop.component);
         const componentRef = this.popHost.viewContainerRef.createComponent(componentFactory);
         const comp = componentRef.instance as PopComponent;
-        comp.id = pop.id;
+        pop.id = comp.id;
         comp.duration = this.duration;
         comp.data = pop.data;
         this.components.push(comp);
