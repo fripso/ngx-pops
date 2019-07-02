@@ -3,7 +3,7 @@ import { TimerService } from './timer.service';
 
 @Component({
     selector: 'pop-component',
-    template: '',
+    template: ''
 })
 export class PopComponent {
     /**
@@ -17,9 +17,9 @@ export class PopComponent {
     id: number;
 
     /**
-     * Content to bind in the view.
+     * Data to bind in the view.
      */
-    content: any;
+    data: any;
 
     /**
      * Component lifetime in ms. Used by autoHide() as a default value.

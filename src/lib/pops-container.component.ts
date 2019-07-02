@@ -29,6 +29,11 @@ export class PopsContainerComponent implements OnInit, OnDestroy {
      * Observable subscriptions
      */
     private subscriptions$: Subscription[] = [];
+
+    /**
+     * Array of currently rendered PopComponents
+     * Used in clearViewContainerRef() to destroy all components
+     */
     private components: PopComponent[] = [];
 
     /**
@@ -64,6 +69,9 @@ export class PopsContainerComponent implements OnInit, OnDestroy {
         this.subscriptions$.forEach(sub => sub.unsubscribe());
     }
 
+    /**
+     * Destroy all components in the ViewContainerRef
+     */
     private clearViewContainerRef() {
         this.components.forEach(c => c.destroyComponent());
         this.components = [];
@@ -78,11 +86,10 @@ export class PopsContainerComponent implements OnInit, OnDestroy {
         const componentFactory = this.componentFactoryResolver.resolveComponentFactory(pop.component);
         const componentRef = this.popHost.viewContainerRef.createComponent(componentFactory);
         const comp = componentRef.instance as PopComponent;
-
-        this.components.push(comp);
         comp.id = pop.id;
         comp.duration = this.duration;
-        comp.content = pop.data;
+        comp.data = pop.data;
+        this.components.push(comp);
 
         this.subscriptions$.push(comp.destroy.pipe(take(1)).subscribe(() => {
             const i = this.components.findIndex(c => c.id === pop.id);
