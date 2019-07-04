@@ -31,11 +31,11 @@ Add both to declarations and imports:
         imports: [
             NgxPopsModule.withComponents([
                 BalloonComponent
-	        ])
-	    ]
+            ])
+        ]
     })
 Create a component to render:
-	
+    
 
     // balloon.component.ts
     
@@ -43,30 +43,30 @@ Create a component to render:
     import { PopComponent } from 'ngx-pops';
         
     @Component({    
-	    template: `    
-		    <div class="balloon" (click)="needle()">
-		        {{ id }}
-			    {{ data.message }}
-	        </div>    
-	    `    
+        template: `    
+            <div class="balloon" (click)="needle()">
+                {{ id }}
+                {{ data.message }}
+            </div>    
+        `    
     })
     
 
     export class BalloonComponent extends PopComponent implements OnInit {  
-        	            
-	    constructor() {    
-		    super();
-	    }
-	    
-	    ngOnInit() {
-		    // optional: enable automatic destruction
-		    super.autoHide();
-	    }
+                        
+        constructor() {    
+            super();
+        }
+        
+        ngOnInit() {
+            // optional: enable automatic destruction
+            super.autoHide();
+        }
        
-	    needle() {
-		    // manually destroy component
-	        super.destroyComponent();
-	    }
+        needle() {
+            // manually destroy component
+            super.destroyComponent();
+        }
     }
     
 
@@ -79,21 +79,21 @@ Inside the container component:
     import { BalloonComponent } from  './balloon.component';
 
     @Component({    
-	    selector: 'my-container',    
-	    template: `    
-		    <button (click)="pops.doPop(balloonComponent, { message: "I am a balloon" })">
-			    Balloon
-			</button>
-		    <pops-container [duration]="3000"></pops-container>
+        selector: 'my-container',    
+        template: `    
+            <button (click)="pops.doPop(balloonComponent, { message: "I am a balloon" })">
+                Balloon
+            </button>
+            <pops-container [duration]="3000"></pops-container>
         `    
     })
 
     export class ContainerComponent {
     
-	    balloonComponent = BalloonComponent;
-	    
-	    constructor(public pops: PopsService) {}	
-	        
+        balloonComponent = BalloonComponent;
+        
+        constructor(public pops: PopsService) {}	
+            
     }
 
 
@@ -112,15 +112,15 @@ This class is accessible through super() when using component inheritance, e.g.:
 
     export class MyComponent extends PopComponent {
     
-	    constructor() {
-		    super();
-		}
-		
-		log() {
-			console.log(super.data);
-		}
-	
-	}
+        constructor() {
+            super();
+        }
+        
+        log() {
+            console.log(super.data);
+        }
+    
+    }
 | | |
 |:-|:-|-
 | `data` | `any` Data object to bind to the component instance. If you want to manipulate the data later on, pass an Observable source and subscribe to it in your template. Defaults to `undefined`
