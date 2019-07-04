@@ -100,12 +100,18 @@ Inside the container component:
 ## API
 
 #### PopService
-||  | 
-|:-|-|
-| `doPop(component, data): void` | `function` Creates a new component to be rendered inside container. Takes a component class and a data object to bind to the component instance
-| `getPopStream():  Observable<Pop>` | `function` Returns an observable stream of the latest pop created |
-|`clearPops():  void`|`Function` Destroys all components in the view |
-|`getFnEventStream():  Observable<string>` | `function` Returns observable stream of function events
+
+`doPop(component, data): void` 
+- `function` Creates a new component to be rendered inside container. Takes a component class and a data object to bind to the component instance.
+
+`getPopStream():  Observable<Pop>`
+- `function` Returns an observable stream of the latest pop created.
+
+`clearPops():  void`
+- `Function` Destroys all components in the view.
+
+`getFnEventStream():  Observable<string>`
+- `function` Returns observable stream of function events.
 
 #### PopComponent
 This class is accessible through super() when using component inheritance, e.g.:
@@ -121,18 +127,30 @@ This class is accessible through super() when using component inheritance, e.g.:
         }
     
     }
-| | |
-|:-|:-|-
-| `data` | `any` Data object to bind to the component instance. If you want to manipulate the data later on, pass an Observable source and subscribe to it in your template. Defaults to `undefined`
-|`duration` | `number` Component lifetime in ms. Used by autoHide() as a default value. Can be manipulated globally using the `[duration]` input on the PopsContainer, or locally via `super.duration` (in which case make sure you set this value before you call `super.autoHide()`. Defaults to `3000` |
-| `autoHide(duration):  void` |`function` Triggers a timer that will complete and then trigger destroyComponent() after specified duration. Defaults to global duration.
-|`setBeforeDestroy(func: () =>  Promise<void>):  void`|`function` Sets value of beforeDestroyFunction. Takes a Promise-returning function to perform logic before the component is destroyed. Useful for performing UI logic (e.g. css animations) that needs to be executed before the component is removed from the DOM.
-|`destroyComponent():  void`|Triggers component destruction. If `beforeDestroyFunction()` is specified, it will call that function and wait for the promise to resolve before triggering the `destroy` event.
-|`destroy`  | `Output: EventEmitter<any>` The destroy event emits after beforeDestroyFunction() resolves (if it exists) and triggers destruction of the component
+
+
+ `data`
+ -  `any` Data object to bind to the component instance. Defaults to `undefined`
+
+`duration` 
+- `number` Component lifetime in ms. Used by autoHide() as a default value. Can be manipulated globally using the `[duration]` input on the PopsContainer, or locally via `super.duration` (in which case make sure you set this value before you call `super.autoHide()`. Defaults to `3000`
+ 
+
+`autoHide(duration):  void`
+- `function` Triggers a timer that will complete and then trigger destroyComponent() after specified duration. Defaults to global duration.
+
+`setBeforeDestroy(func: () =>  Promise<void>):  void`
+- `function` Sets value of beforeDestroyFunction. Takes a Promise-returning function to perform logic before the component is destroyed. Useful for performing UI logic (e.g. css animations) that needs to be executed before the component is removed from the DOM.
+
+`destroyComponent():  void`
+- `function` Triggers component destruction. If `beforeDestroyFunction()` is specified, it will call that function and wait for the promise to resolve before triggering the `destroy` event.
+
+`destroy`
+- `Output: EventEmitter<any>` The destroy event emits after beforeDestroyFunction() resolves (if it exists) and triggers destruction of the component
 #### PopContainer
-|||
-|--|-|
-|`duration` | `number` Optional: Globally set time in ms after which autoHide() completes
+
+`duration` 
+- `number` Optional: Globally set time in ms after which autoHide() completes
 
 ## License
 
