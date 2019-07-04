@@ -8,11 +8,8 @@ import { take } from 'rxjs/operators';
 @Component({
     selector: 'pops-container',
     template: `
-        <div>
-            <ng-template pop-host></ng-template>
-        </div>
+        <ng-template pop-host></ng-template>
     `
-    // changeDetection: ChasngeDetectionStrategy.OnPush
 })
 export class PopsContainerComponent implements OnInit, OnDestroy {
     /**
@@ -47,6 +44,11 @@ export class PopsContainerComponent implements OnInit, OnDestroy {
     @Input() duration = 3000;
 
     /**
+     * Container identifier. Use this label if you need multiple instances of the container in your component.
+     */
+    @Input() containerLabel = 'default';
+
+    /**
      * Dependency injection
      * @param pops Pops service that provides the pops data
      * @param componentFactoryResolver Angular's ComponentFactoryResolver for creating dynamic components
@@ -58,8 +60,16 @@ export class PopsContainerComponent implements OnInit, OnDestroy {
      * Subscribe to function events from PopsService
      */
     ngOnInit() {
-        this.subscriptions$.push(this.popups$.subscribe((pop: Pop) => this.loadComponent(pop)));
-        this.subscriptions$.push(this.events$.subscribe(fn => this[fn]()));
+        this.subscriptions$.push(this.popups$.subscribe(res => {
+            if (res.target === this.containerLabel) {
+                this.loadComponent(res.pop);
+            }
+        }));
+        this.subscriptions$.push(this.events$.subscribe(res => {
+            if (res.target === this.containerLabel) {
+                this[res.fn]();
+            }
+        }));
     }
 
     /**
@@ -91,10 +101,12 @@ export class PopsContainerComponent implements OnInit, OnDestroy {
         comp.data = pop.data;
         this.components.push(comp);
 
-        this.subscriptions$.push(comp.destroy.pipe(take(1)).subscribe(() => {
-            const i = this.components.findIndex(c => c.id === pop.id);
-            this.components.splice(i, 1);
-            componentRef.destroy();
-        }));
+        this.subscriptions$.push(
+            comp.destroy.pipe(take(1)).subscribe(() => {
+                const i = this.components.findIndex(c => c.id === pop.id);
+                this.components.splice(i, 1);
+                componentRef.destroy();
+            })
+        );
     }
 }

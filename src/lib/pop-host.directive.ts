@@ -1,5 +1,4 @@
-import { Directive, ViewContainerRef, ComponentRef } from '@angular/core';
-import { PopComponent } from './pop.component';
+import { Directive, ViewContainerRef } from '@angular/core';
 
 @Directive({
   selector: '[pop-host]',
