@@ -81,7 +81,7 @@ Inside the container component:
     @Component({    
         selector: 'my-container',    
         template: `    
-            <button (click)="pops.doPop(balloonComponent, { message: "I am a balloon" })">
+            <button (click)="pops.doPop(balloonComponent, { message: 'I am a balloon' })">
                 Balloon
             </button>
             <pops-container [duration]="3000"></pops-container>
