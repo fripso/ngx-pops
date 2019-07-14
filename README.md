@@ -131,8 +131,8 @@ This class is accessible through super() when using component inheritance, e.g.:
  `data`
  -  `any` Data object to bind to the component instance. Defaults to `undefined`
 
-`duration` 
-- `number` Component lifetime in ms. Used by autoHide() as a default value. Can be manipulated globally using the `[duration]` input on the PopsContainer, or locally via `super.duration` (in which case make sure you set this value before you call `super.autoHide()`. Defaults to `3000`
+`setDuration(ms): void` 
+- `function` Set component lifetime in ms (defaults to 3000). Used by autoHide() as a default value. Can be manipulated globally using the `[duration]` input on the PopsContainer, or locally using setDuration(), in which case make sure you set this value before you call `super.autoHide()`.
  
 `autoHide(duration):  void`
 - `function` Triggers a timer that will complete and then trigger destroyComponent() after specified duration. Defaults to global duration.
