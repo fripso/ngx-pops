@@ -1,0 +1,17 @@
+.notification {
+    position: relative;
+    margin: 1rem 1.5rem;
+    animation: notifIn 0.5s;
+    animation-fill-mode: forwards !important;
+    width: fit-content;
+}
+
+@keyframes notifIn {
+    0% { transform: translateY(-10%) }
+    100% { transform: translateY(0) }
+}
+
+@keyframes notifOut {
+    0% { opacity: 1 }
+    100% { opacity: 0 }
+}

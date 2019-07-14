@@ -1,0 +1,13 @@
+.chart {
+    background-color: whitesmoke;
+
+    padding: 1rem;
+
+    &.is-closing {
+        opacity: 0.5;
+    }
+
+    height: 20%;
+    width: 400px;
+}
+

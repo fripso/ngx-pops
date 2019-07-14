@@ -1,0 +1,48 @@
+.balloon-container {
+    position: absolute;
+    animation: balloonIn 0.5s;
+    transition: all .1s ease-in-out;
+    animation-fill-mode: forwards !important;
+
+    &:hover {
+        transform: scale(1.2);
+    }
+}
+
+.balloon {
+    border-radius: 50%;
+    height: 150px;
+    width: 150px;
+    animation: balloonMove 4s ease-in-out infinite;
+    box-shadow: inset 10px -10px 0 rgba(0,0,0,0.07);
+
+    &:hover {
+        cursor: crosshair;
+    }
+}
+
+.balloon:before {
+    position: absolute;
+    bottom: -12px;
+    width: 100%;
+    color: inherit;
+    display: block;
+    font-size: 20px;
+    text-align: center;
+    content: "▲";
+}
+
+@keyframes balloonMove {
+    0%, 100% { transform:translateY(0) rotate(-4deg); }
+    50% { transform:translateY(-55px) rotate(4deg); }
+}
+
+@keyframes balloonIn {
+    0% { transform: translateY(100%) scale(2); }
+    100% { transform: translateY(0) scale(1); }
+}
+
+@keyframes balloonOut {
+    0% { transform: scale(1); }
+    100% { transform: scale(0); }
+}

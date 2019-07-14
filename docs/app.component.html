@@ -1,0 +1,107 @@
+<div class="columns">
+    <div class="column is-8 ">
+        <div class="section">
+            <h3 class="title is-4">ngx-pops</h3>
+            <h2 class="subtitle">Dynamic Components Library</h2>
+            <a href="https://github.com/fripso/ngx-pops">ngx-pops on GitHub</a>
+            <div class="container">
+                <p>Rendering dynamic components is extremely easy using pops. You can render any component you want, using any data structure you want -
+                as long as it inherits PopComponent, pops will handle component composition and destruction. You can use multiple containers in conjuction with each other by labeling them.
+                Below are a couple of examples of how to use the library. </p>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="columns">
+    <div class="column is-4">
+        <div class="section">
+            <div class="field is-grouped">
+                <div class="control">
+                    <button class="button" (click)="pops.doPop(notificationComponent, {type: 'success', message: 'File saved!'})">Success</button>
+                </div>
+                <div class="control">
+                    <button class="button" (click)="pops.doPop(notificationComponent, {type: 'warning', message: 'Something went wrong!'})">Warning</button>
+                </div>
+                <div class="control">
+                    <button class="button" (click)="pops.clearPops()">Clear notifications</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="column is-4">
+        <div class="section">
+            <p>A perfect use case for pops is notifications. Create your notification component, pass it to doPop() along
+                with any
+                payload
+                you might want to display, and pops will render them for you inside the container component.
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="columns">
+    <div class="column is-4">
+        <div class="section">
+            <div class="field is-grouped is-grouped-multiline">
+                <div class="control">
+                    <button class="button" (click)="pops.doPop(balloonComponent, blowBalloon(), 'balloons')">Blow Up
+                        Balloon</button>
+                </div>
+                <div class="control">
+                    <button class="button" (click)="doManyPops(10, balloonComponent,'balloons')">Blow Up 10 Balloons</button>
+                </div>
+                <div class="control">
+                    <button class="button" (click)="pops.doPop(balloonComponent, blowBalloon(false),'balloons')">Blow Up Eternal
+                        Balloon</button>
+                </div>
+                <div class="control">
+                    <button class="button" (click)="pops.clearPops('balloons')">💉 Pop All Balloons</button>
+                </div>
+                <div class="control has-icons-right">
+                    <input class="input" type="number" [(ngModel)]="duration">
+                    <span class="icon is-small is-right">
+                       ms
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="column is-4">
+        <div class="section">
+            <p>If you are looking for something less serious, try these balloons. Pops will pop them automatically after 3000 ms. You can blow up one, blow up ten, pop them manually or
+                pop them all at once. You can also blow up an eternal balloon.
+            </p>
+        </div>
+    </div>
+</div>
+<div class="columns">
+    <div class="column is-4">
+        <div class="section">
+            <h2 class="subtitle">Charts (Demo powered by <a href="https://www.chartjs.org/">charts.js</a>)</h2>
+            <div class="field is-grouped">
+                <div class="control">
+                    <button class="button" (click)="pops.doPop(pieComponent, '', 'charts')">Pie</button>
+                </div>
+                <div class="control">
+                    <button class="button" (click)="pops.doPop(lineComponent, '', 'charts')">Line</button>
+                </div>
+                <div class="control">
+                    <button class="button" (click)="pops.clearPops('charts')">Clear charts</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="column is-4">
+        <div class="section">
+            <p>Creating a dashboard is also easy. Create your charts (try <a href="https://www.chartjs.org/">charts.js</a> / <a href="https://valor-software.com/ng2-charts/">ng2-charts</a>), pass the data you want to display, and boom!
+                You could display dynamic data using observables. This example just uses interal observables - you can compose your charts in whatever way you want.
+            </p>
+        </div>
+    </div>
+</div>
+
+<pops-container [containerLabel]="'balloons'" [duration]="duration"></pops-container>
+<pops-container class="notification-container" [duration]="duration"></pops-container>
+<pops-container [containerLabel]="'charts'" class="charts-container" ></pops-container>
+
