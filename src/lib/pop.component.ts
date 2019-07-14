@@ -30,7 +30,7 @@ export class PopComponent {
      * If specified, gets called when destroyComponent() has been triggered. Should return a Promise.
      * @returns Promise
      */
-    private beforeDestroyFunction: () => Promise<void>;
+    private beforeDestroyFunction: () => Promise<void> = () => new Promise(resolve => resolve());
 
     /**
      * Triggers a timer that will complete and then trigger destroyComponent() after specified duration. Defaults to global duration.
