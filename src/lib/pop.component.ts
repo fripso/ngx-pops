@@ -19,12 +19,20 @@ export class PopComponent {
     /**
      * Data to bind in the view.
      */
-    data: any;
+    public data: any;
 
     /**
      * Component lifetime in ms. Used by autoHide() as a default value.
      */
-    duration: number;
+    public duration: number;
+
+    /**
+     *
+     * @param ms Set duration function, need because nly public and protected methods of the base class are accessible via the 'super' keyword.
+     */
+    public setDuration(ms) {
+        this.duration = ms;
+    }
 
     /**
      * If specified, gets called when destroyComponent() has been triggered. Should return a Promise.
