@@ -1,11 +1,9 @@
 # ngx-pops
-[![npm version](https://badge.fury.io/js/ngx-pops.svg)](https://badge.fury.io/js/ngx-pops)
+[![npm version](https://badge.fury.io/js/ngx-pops.png)](https://badge.fury.io/js/ngx-pops)
 
 `ngx-pops` is a framework for easily rendering your own dynamic components (for example notifications) using `ComponentFactoryResolver` and component class inheritance.
 
-
-
-
+##### Demo: [Link](https://ngx-pops.friso.app)
 
 
 ## Installation
