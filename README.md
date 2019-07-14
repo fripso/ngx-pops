@@ -34,8 +34,8 @@ Add both to declarations and imports:
             ])
         ]
     })
-Create a component to render:
-    
+
+Create a component to render:    
 
     // balloon.component.ts
     
@@ -49,8 +49,7 @@ Create a component to render:
                 {{ data.message }}
             </div>    
         `    
-    })
-    
+    })    
 
     export class BalloonComponent extends PopComponent implements OnInit {  
                         
@@ -101,8 +100,8 @@ Inside the container component:
 
 #### PopService
 
-`doPop(component, data): void` 
-- `function` Creates a new component to be rendered inside container. Takes a component class and a data object to bind to the component instance.
+`doPop(component, data, target): void` 
+- `function` Creates a new component to be rendered inside container. Takes a component class, a data object to bind to the component instance, and an optional target to specify in which container to render the new component.
 
 `getPopStream():  Observable<Pop>`
 - `function` Returns an observable stream of the latest pop created.
@@ -135,7 +134,6 @@ This class is accessible through super() when using component inheritance, e.g.:
 `duration` 
 - `number` Component lifetime in ms. Used by autoHide() as a default value. Can be manipulated globally using the `[duration]` input on the PopsContainer, or locally via `super.duration` (in which case make sure you set this value before you call `super.autoHide()`. Defaults to `3000`
  
-
 `autoHide(duration):  void`
 - `function` Triggers a timer that will complete and then trigger destroyComponent() after specified duration. Defaults to global duration.
 
@@ -147,10 +145,12 @@ This class is accessible through super() when using component inheritance, e.g.:
 
 `destroy`
 - `Output: EventEmitter<any>` The destroy event emits after beforeDestroyFunction() resolves (if it exists) and triggers destruction of the component
+
 #### PopContainer
 
 `duration` 
 - `number` Optional: Globally set time in ms after which autoHide() completes
+- `containerLabel` Optional: Set unique container label to use multiple containers in conjunction with each other. Defaults to 'default'
 
 ## License
 
