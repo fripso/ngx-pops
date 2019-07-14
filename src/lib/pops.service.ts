@@ -31,8 +31,8 @@ export class PopsService {
      * Throws the 'clearViewContainerRef' event that PopsContainer listens to and subsequently removes all components from the view
      * @param target Target container name
      */
-    clearPops(target = 'default'): void {
-        this.functionEvents$.next({ fn: 'clearViewContainerRef', target });
+    clearPops(tgt = 'default'): void {
+        this.functionEvents$.next({ fn: 'clearViewContainerRef', target: tgt });
     }
 
     /**
