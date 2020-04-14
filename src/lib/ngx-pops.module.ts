@@ -16,7 +16,7 @@ import { PopComponent } from './pop.component';
     providers: [PopsService, TimerService]
 })
 export class NgxPopsModule {
-    static withComponents(components: any[]): ModuleWithProviders {
+    static withComponents(components: any[]): ModuleWithProviders<NgxPopsModule> {
         return {
             ngModule: NgxPopsModule,
             providers: [

@@ -1,5 +1,7 @@
+import { Injectable } from "@angular/core";
 // Thank you dominique-mueller: https://github.com/dominique-mueller/angular-notifier/blob/develop/src/lib/src/services/notifier-timer.service.ts
 
+@Injectable()
 export class TimerService {
 
     /**
